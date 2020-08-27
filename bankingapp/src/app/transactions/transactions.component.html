@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="transfer-form">
+
+        <div class="subhead">
+            <img src="../assets/icons/arrows.png" style="float: left" width="27" />
+            Make a Transfer
+        </div>
+        <div class="pd16">
+            <form [formGroup]="transferForm" (ngSubmit)="onFormSubmit()" class="main-form" novalidate>
+
+                <mat-form-field class="example-full-width" style="width:100%">
+                    <mat-label><strong> FROM ACCOUNT</strong></mat-label>
+                    <input matInput formControlName="fromAccount">
+                </mat-form-field>
+                <mat-form-field class="example-full-width" style="width:100%">
+                    <mat-label><strong> TO ACCOUNT</strong></mat-label>
+                    <input matInput formControlName="toAccount" required>
+
+                    <mat-error *ngIf="submitted && f.toAccount.errors">
+                        To Account is required.
+                    </mat-error>
+
+                </mat-form-field>
+                <mat-form-field class="example-full-width" style="width:100%">
+                    <mat-label><strong> AMOUNT</strong></mat-label>
+                    <input matInput placeholder="$ 0.00" formControlName="amount" required>
+                    <mat-error *ngIf="submitted && f.amount.errors">
+                        Amount is required.
+                    </mat-error>
+
+                </mat-form-field>
+                <div style="float:right">
+                    <button type="submit" class="btn btn-orange">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="recent-transactions">
+        <div class="subhead">
+            <img src="../assets/icons/briefcase.png" style="float: left" width="27" />
+            Recent Transactions
+        </div>
+        <div class="pd16">
+            <div>
+                <mat-form-field class="example-full-width pd5" style="width:240px">
+                    <input matInput placeholder="search by typing..." [(ngModel)]="term">
+                </mat-form-field>
+                <strong class="pd5">Sort by</strong>
+                <button class="btn btn-default " (click)="sortBy('transactionDate')">DATE</button> <button class="btn btn-default" (click)="sortBy('merchant')">BENEFICIARY</button> <button class="btn btn-default" (click)="sortBy('amount')">AMOUNT</button>
+            </div>
+
+            <tr *ngFor="let transaction of transactionDetails.data.reverse() | filter:term" class="transaction-details">
+                <td style=" width:1%; background-color:{{transaction.categoryCode}}"> </td>
+                <td style="padding-top:15px;padding-bottom:15px; text-align:center; width:15%">{{transaction.transactionDate| date:"MMM yy"}}</td>
+                <td style="width:10%"><img src="{{transaction.merchantLogo}}" class="imgtransaction" alt="merchantLogo" width="40" /></td>
+                <td style="width:64%">
+                    <div>
+                        <strong>{{transaction.merchant}}</strong>
+                    </div>
+                    <div>
+                        {{transaction.transactionType}}
+                    </div>
+                </td>
+                <td style="width:9%; text-align:center"> <strong>-{{transaction.amount| currency}}</strong></td>
+            </tr>
+        </div>
+    </div>
+</div>

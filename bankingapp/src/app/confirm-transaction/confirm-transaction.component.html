@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Confirmation</h2>
+<div *ngIf="!data.isOverDraft">
+    <mat-dialog-content class="mat-typography">
+        <div>
+            FROM ACCOUNT:{{data.fromAccount}}
+        </div>
+        <br />
+        <div>
+            TO ACCOUNT:{{data.toAccount}}
+        </div>
+        <br />
+        <div>
+            AMOUNT:{{data.amount |currency }}
+        </div>
+        <br />
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Ok</button>
+    </mat-dialog-actions>
+</div>
+<div *ngIf="data.isOverDraft">
+    <mat-dialog-content class="mat-typography">
+        <br>
+        <p>
+            You have reached the overdraft limit.
+        </p>
+        <br />
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button [mat-dialog-close]="false" cdkFocusInitial>Ok</button>
+    </mat-dialog-actions>
+</div>
