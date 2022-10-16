@@ -16,7 +16,7 @@ Ensure you're running the latest versions Node and NPM
 Once you have those, you should install these globals with` npm install --global`:
 
 #_Installing_
-npm install to install all dependencies
+npm install to install all dependencies. Check for the version and get the latest node
 Install the Angular CLI
 
 `npm install -g @angular/cli`
